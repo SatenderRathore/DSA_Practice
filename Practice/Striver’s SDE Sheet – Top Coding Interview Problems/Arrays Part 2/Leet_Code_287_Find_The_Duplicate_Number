@@ -1,0 +1,35 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+/** 
+    var findDuplicate = function(nums) { //Solution with extra space
+        let db = {}
+
+        for(let i=0; i<nums.length; i++) {
+            if(db[nums[i]]){
+                return nums[i]
+            } else {
+                db[nums[i]] = true
+            }
+        }
+
+    };
+*/
+
+var findDuplicate = function(nums) {// Optimal solution with two pointer approach
+    let [slow, fast] = [nums[0], nums[0]];
+    do {
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+    } while(slow !== fast)
+
+    fast = nums[0];
+
+    while(slow!==fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+
+    return fast
+}
